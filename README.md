@@ -1,1 +1,3 @@
-# TI014520221-RedesDeComputadores-UFC-2022.1
+# Redes de Computadores I - Trabalho Sockets
+
+Ideia: Servidor Proxy

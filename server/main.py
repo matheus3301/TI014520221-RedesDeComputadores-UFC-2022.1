@@ -1,9 +1,11 @@
-import socket, threading, logging
+import socket
+import threading
+import logging
 from src.messages import Message
 
-HOSTNAME='localhost'
-PORT=3333
-BUFFER_SIZE=2048
+HOSTNAME = 'localhost'
+PORT = 3333
+BUFFER_SIZE = 4096
 
 queue = []
 pair = {}
@@ -20,7 +22,7 @@ def main():
     queue_processing.start()
 
 
-def handle_messages(server : socket):
+def handle_messages(server: socket):
     while True:
         message, address = server.recvfrom(BUFFER_SIZE)
         message = message.decode()
@@ -34,15 +36,15 @@ def handle_messages(server : socket):
         elif pair.get(address) != None:
             server.sendto(message, pair.get(address))
             # server.sendto()
-            #TODO: Send image to the other person
+            # TODO: Send image to the other person
             print("Sending to it pair")
         else:
             server.sendto(Message.ERROR.value.encode(), address)
 
 
-def process_queue(server : socket):
+def process_queue(server: socket):
     while True:
-        if len(queue) >= 2: # at least two people waiting for a meet
+        if len(queue) >= 2:  # at least two people waiting for a meet
             a = queue[0]
             del queue[0]
 
